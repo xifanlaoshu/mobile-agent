@@ -35,18 +35,22 @@ The user will provide the current screen state as a structured text representati
 - Post cards with titles, authors, engagement metrics
 - Action history (what you did last)
 
-# Output Format
-You MUST respond with ONLY the following JSON structure, no additional text:
+# Output Format — CRITICAL
+You must respond with EXACTLY the JSON structure below. No markdown wrappers, no code fences, just raw JSON.
 
-```json
-{
-  "actions": [
-    { "type": "...", "target_id": ..., "reason": "..." }
-  ],
-  "observation": "Brief description of what you see on screen (Chinese preferred)",
-  "reasoning": "Why you chose these actions (Chinese preferred)"
-}
-```
+Each action in the "actions" array must have:
+- "type": string — one of the action names above
+- "target_id": number (if action requires a UI element target)
+- "reason": string — why you chose this action
+
+CORRECT example:
+{"actions":[{"type":"scroll_down","reason":"浏览更多内容"}],"observation":"信息流中有咖啡、旅行、护肤内容","reasoning":"刚进入发现页，先浏览更多再决定"}
+
+WRONG (singular, not array): {"action":"scroll_down"}
+WRONG (missing reason): {"actions":[{"type":"scroll_down"}]}
+
+ANOTHER CORRECT example with like:
+{"actions":[{"type":"enter_post","target_id":4,"reason":"旅行帖匹配兴趣"},{"type":"wait","duration_ms":8000,"reason":"模拟阅读"},{"type":"like","target_id":4,"reason":"内容优质"}],"observation":"大理骑行攻略，图文精美","reasoning":"高优先级旅行内容，应该互动"}
 
 # Rules
 1. ALWAYS output valid JSON — no markdown, no code fences in the response
