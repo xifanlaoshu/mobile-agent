@@ -27,3 +27,4 @@ debug_output/
 
 # Config with secrets
 config/secrets.yaml
+app/build/
