@@ -19,6 +19,10 @@ class XhsAgentApp : Application() {
             private set
     }
 
+    /** DeepSeek API Key，从 BuildConfig 读取（值来自 local.properties） */
+    val apiKey: String?
+        get() = BuildConfig.DEEPSEEK_API_KEY.takeIf { it.isNotBlank() && it != "PLACEHOLDER" }
+
     override fun onCreate() {
         super.onCreate()
         instance = this
