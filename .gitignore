@@ -1,0 +1,29 @@
+# Android
+*.iml
+.gradle/
+/local.properties
+/.idea/
+.DS_Store
+/build/
+/captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+*.keystore
+!debug.keystore
+
+# App runtime
+local.properties
+*.log
+screenshots/
+debug_output/
+
+# IDE
+*.swp
+*.swo
+*~
+.vscode/
+
+# Config with secrets
+config/secrets.yaml

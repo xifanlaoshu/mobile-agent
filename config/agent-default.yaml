@@ -1,0 +1,71 @@
+# ============================================
+# XhsAgent 默认配置
+# ============================================
+# 用户可以在 App UI 中覆盖这些值
+
+ai:
+  model: "deepseek-v4-flash"
+  temperature: 0.3
+  max_tokens: 800
+  api_timeout_ms: 30000
+  retry:
+    max_attempts: 3
+    base_delay_ms: 1000
+    max_delay_ms: 10000
+
+interests:
+  # 按优先级排序（数字越小优先级越高）
+  categories:
+    - name: "旅行"
+      keywords: ["旅行", "旅游", "攻略", "自驾", "民宿", "机票", "签证",
+                  "古镇", "自然风光", "摄影", "景点", "打卡"]
+      priority: 1
+
+    - name: "美食"
+      keywords: ["美食", "探店", "菜谱", "烘焙", "咖啡", "甜品",
+                  "家常菜", "餐厅", "小吃", "饮茶"]
+      priority: 2
+
+    - name: "科技"
+      keywords: ["数码", "手机", "App", "效率", "AI", "人工智能",
+                  "编程", "生产力", "工具"]
+      priority: 3
+
+behavior:
+  # 兴趣匹配阈值（百分比）
+  like_threshold: 70
+  comment_threshold: 85
+
+  # 浏览行为
+  min_post_view_sec: 3
+  max_post_view_sec: 20
+  scroll_cooldown_ms: 3000
+  scroll_variation: 0.5    # ±50% 随机变化
+
+  # 每轮决策的扫描范围
+  feed_scan_count: 8        # 每次给 AI 看多少张卡片
+
+safety:
+  # 频率限制
+  max_likes_per_hour: 30
+  max_comments_per_hour: 5
+  max_session_minutes: 45
+  cooldown_minutes: 15
+  max_daily_likes: 200
+  max_daily_comments: 30
+
+  # 异常检测
+  same_action_threshold: 5
+  scroll_no_content_threshold: 5
+  action_fail_threshold: 3
+
+xhs:
+  app_package: "com.xingin.xhs"
+  app_launch_activity: "com.xingin.xhs.index.IndexActivityV2"
+  feed_scroll_duration_ms: 600
+  comment_max_length: 1000
+
+logging:
+  level: "INFO"             # DEBUG | INFO | WARN | ERROR
+  save_screenshots: false   # 是否保存截图用于调试（注意隐私）
+  max_log_days: 7

@@ -1,0 +1,43 @@
+[
+  {
+    "scenario": "Browse feed, scroll down",
+    "screen_state": "发现页 (推荐Tab)，信息流有8篇帖子。看到#1关于北京咖啡馆、#2关于旅行攻略、#3关于护肤",
+    "ai_response": {
+      "actions": [
+        { "type": "scroll_down", "reason": "继续浏览更多内容" }
+      ],
+      "observation": "当前Tab推荐中，前几篇有咖啡、旅行、护肤内容",
+      "reasoning": "刚进入发现页，先浏览更多内容再决定是否互动"
+    }
+  },
+  {
+    "scenario": "Found interesting travel post, enter and like",
+    "screen_state": "信息流中 #4 标题:'云南大理洱海骑行全攻略' 旅行类，高赞(2.3万)",
+    "ai_response": {
+      "actions": [
+        { "type": "enter_post", "target_id": 4, "reason": "旅行类帖子与用户兴趣高度匹配，进入查看详情" },
+        { "type": "wait", "duration_ms": 8000, "reason": "模拟阅读时间" },
+        { "type": "like", "target_id": 4, "reason": "内容质量高，与旅行兴趣匹配" },
+        { "type": "wait", "duration_ms": 3000 },
+        { "type": "exit_post", "reason": "返回信息流继续浏览" }
+      ],
+      "observation": "进入了一篇关于大理洱海骑行的详细攻略，图文丰富，排版精美",
+      "reasoning": "用户兴趣中旅行优先级最高，内容质量好，适合点赞互动"
+    }
+  },
+  {
+    "scenario": "Comment on a high-quality post",
+    "screen_state": "帖子详情: '北京周边8个自驾露营地推荐' 内容详细，配图精美，已点赞",
+    "ai_response": {
+      "actions": [
+        { "type": "enter_comment", "target_id": 5, "reason": "优质的自驾露营攻略，值得评论互动" },
+        { "type": "wait", "duration_ms": 2000 },
+        { "type": "type_comment", "text": "收藏了！去年去过延庆的，确实很美，今年准备去怀柔那个", "reason": "真实的体验分享式评论" },
+        { "type": "wait", "duration_ms": 5000 },
+        { "type": "exit_post", "reason": "评论发送完毕，返回" }
+      ],
+      "observation": "一篇关于北京周边露营地的详细攻略，图片精美，内容实用",
+      "reasoning": "帖子和个人信息高度相关，可以留下一段真实感评论增加互动"
+    }
+  }
+]
