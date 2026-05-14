@@ -94,10 +94,28 @@ enum class BrowsePhase {
 }
 
 /**
- * 操作结果记录
+ * 操作结果记录（与 ExecutionResult 共享，用于历史记录）
  */
 data class ActionResult(
     val action: AgentAction,
     val success: Boolean,
+    val error: String? = null,
     val timestamp: Long = System.currentTimeMillis()
 )
+
+/**
+ * 从 ExecutionResult 转换为 ActionResult
+ */
+fun com.xhs.agent.model.ExecutionResult.toActionResult(): ActionResult {
+    return when (this) {
+        is com.xhs.agent.model.ExecutionResult.Success -> ActionResult(
+            action = action, success = true, timestamp = System.currentTimeMillis()
+        )
+        is com.xhs.agent.model.ExecutionResult.Failed -> ActionResult(
+            action = action, success = false, error = error, timestamp = System.currentTimeMillis()
+        )
+        is com.xhs.agent.model.ExecutionResult.Skipped -> ActionResult(
+            action = action, success = false, error = reason, timestamp = System.currentTimeMillis()
+        )
+    }
+}

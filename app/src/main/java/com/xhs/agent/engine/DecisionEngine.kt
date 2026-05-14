@@ -179,8 +179,9 @@ class DecisionEngine(
                 val result = actionExecutor.execute(action)
 
                 // 记录
-                actionHistory.add(result)
-                _lastAction.value = result
+                val actionResult = result.toActionResult()
+                actionHistory.add(actionResult)
+                _lastAction.value = actionResult
 
                 if (result is ExecutionResult.Success) {
                     addLog(LogLevel.INFO, "执行: ${action.type} ✓ ${action.reason}")
