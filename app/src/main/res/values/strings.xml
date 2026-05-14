@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">小红书助手</string>
+    <string name="accessibility_service_description">XhsAgent 无障碍服务，用于自动化控制小红书</string>
+</resources>

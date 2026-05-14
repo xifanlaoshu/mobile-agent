@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.xhs.agent">
 
     <!-- ============ 权限声明 ============ -->
@@ -29,10 +30,11 @@
     <application
         android:name=".XhsAgentApp"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@android:mipmap/sym_def_app_icon"
+        android:roundIcon="@android:mipmap/sym_def_app_icon"
         android:label="小红书助手"
         android:supportsRtl="true"
-        android:theme="@style/Theme.XhsAgent"
+        android:theme="@android:style/Theme.Material.Light.NoActionBar"
         android:usesCleartextTraffic="true">
 
         <!-- 主 Activity：控制面板 -->
