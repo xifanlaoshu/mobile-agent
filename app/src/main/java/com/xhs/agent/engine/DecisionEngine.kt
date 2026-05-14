@@ -339,7 +339,12 @@ class DecisionEngine(
     private fun handleSafetyBlock(check: SafetyCheck) {
         addLog(LogLevel.WARN, "安全模块阻止: ${check.reason}")
         when (check.action) {
-            SafetyAction.WAIT -> waitRandomCycleDelay()
+            SafetyAction.WAIT -> {
+                // 启动协程等待（此函数非 suspend）
+                CoroutineScope(Dispatchers.Default).launch {
+                    waitRandomCycleDelay()
+                }
+            }
             SafetyAction.PAUSE -> pause()
             SafetyAction.STOP -> stop()
             SafetyAction.COOLDOWN -> {
@@ -348,6 +353,7 @@ class DecisionEngine(
                     executeCooldown()
                 }
             }
+            SafetyAction.NONE -> { /* 无动作 */ }
         }
     }
 

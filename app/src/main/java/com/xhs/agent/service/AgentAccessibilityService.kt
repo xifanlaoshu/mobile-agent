@@ -229,7 +229,13 @@ class AgentAccessibilityService : AccessibilityService() {
             val editText = findEditableNode(root)
             editText?.let { node ->
                 // 先清空已有内容
-                node.performAction(AccessibilityNodeInfo.ACTION_SELECT_ALL)
+                // Android Accessibility API 没有 ACTION_SELECT_ALL
+                // 使用 ACTION_SET_SELECTION 选中全文本
+                val args = android.os.Bundle().apply {
+                    putInt(AccessibilityNodeInfo.ACTION_ARGUMENT_SELECTION_START_INT, 0)
+                    putInt(AccessibilityNodeInfo.ACTION_ARGUMENT_SELECTION_END_INT, Int.MAX_VALUE)
+                }
+                node.performAction(AccessibilityNodeInfo.ACTION_SET_SELECTION, args)
                 node.performAction(AccessibilityNodeInfo.ACTION_CUT)
 
                 // 使用剪贴板方式输入确保中文支持
