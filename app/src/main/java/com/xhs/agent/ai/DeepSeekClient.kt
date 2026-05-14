@@ -214,7 +214,7 @@ class DeepSeekClient(
         sessionContext: SessionContext,
         maxRetries: Int = 3
     ): Result<AiResponse> {
-        var lastError: Exception? = null
+        var lastError: Throwable? = null
 
         for (attempt in 1..maxRetries) {
             val result = decide(
